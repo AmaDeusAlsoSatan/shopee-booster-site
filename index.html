@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopee Booster — Suite Pro</title>
+<meta name="description" content="Suite profissional de otimização para vendedores Shopee. Auditoria de concorrentes, chatbot multimodal e monitoramento em tempo real.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --orange:       #EE4D2D;
+  --orange-hot:   #FF6340;
+  --orange-dim:   rgba(238,77,45,0.12);
+  --orange-line:  rgba(238,77,45,0.3);
+  --black:        #080808;
+  --surface:      #101010;
+  --card:         #161616;
+  --card-hover:   #1e1e1e;
+  --border:       rgba(255,255,255,0.06);
+  --text:         #F0EDE8;
+  --text-muted:   #7A7772;
+  --text-dim:     #4A4744;
+  --mono:         'IBM Plex Mono', monospace;
+  --display:      'Bebas Neue', sans-serif;
+  --body:         'DM Sans', sans-serif;
+  --radius:       6px;
+  --radius-lg:    12px;
+}
+
+/* ═══════════════════════════════════════════════
+   RESET + BASE
+═══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--black);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.4;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ═══════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════ */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(8,8,8,0.82);
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: #63E2B7; /* Greenish */
+  background: rgba(99, 226, 183, 0.08);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(99, 226, 183, 0.2);
+  margin-left: 20px;
+}
+
+.status-led {
+  width: 6px;
+  height: 6px;
+  background: #63E2B7;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #63E2B7;
+  animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  50% { opacity: 0.4; filter: brightness(0.6); }
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  color: var(--text);
+}
+
+.nav-logo-dot {
+  width: 8px; height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+.nav-cta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 1px solid var(--orange);
+  color: var(--orange);
+  border-radius: var(--radius);
+  transition: all 0.2s;
+  cursor: pointer;
+  background: transparent;
+}
+.nav-cta:hover {
+  background: var(--orange);
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 0 80px;
+  overflow: hidden;
+}
+
+/* Big background grid */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Orange glow */
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(238,77,45,0.18) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -60%);
+  pointer-events: none;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px solid var(--orange-line);
+  background: var(--orange-dim);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  background: var(--orange);
+  border-radius: 50%;
+}
+
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(4.5rem, 12vw, 9rem);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+.hero-title span {
+  color: var(--orange);
+  display: block;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  max-width: 480px;
+  margin-top: 20px;
+  line-height: 1.7;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--orange);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary:hover {
+  background: var(--orange-hot);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(238,77,45,0.35);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-secondary:hover {
+  border-color: rgba(255,255,255,0.2);
+  color: var(--text);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+
+.stat-item {}
+
+.stat-value {
+  font-family: var(--display);
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION SHARED
+═══════════════════════════════════════════════ */
+section {
+  padding: 100px 0;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--orange);
+}
+
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  max-width: 500px;
+  line-height: 1.75;
+}
+
+/* ═══════════════════════════════════════════════
+   FEATURES
+═══════════════════════════════════════════════ */
+#features {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.features-header {
+  margin-bottom: 56px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.feature-card {
+  background: var(--card);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s;
+}
+
+.feature-card:hover {
+  background: var(--card-hover);
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+
+.feature-card:hover::before {
+  transform: scaleX(1);
+}
+
+.feature-version {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: var(--orange-dim);
+  border: 1px solid var(--orange-line);
+  padding: 2px 8px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.feature-name {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+.feature-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.feature-bullets {
+  margin-top: 20px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feature-bullets li {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-weight: 300;
+}
+
+.feature-bullets li::before {
+  content: '›';
+  color: var(--orange);
+  flex-shrink: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════════
+   DOWNLOAD
+═══════════════════════════════════════════════ */
+#download {
+  position: relative;
+  overflow: hidden;
+}
+
+#download::before {
+  content: '';
+  position: absolute;
+  bottom: -200px; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 500px;
+  background: radial-gradient(ellipse, rgba(238,77,45,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.download-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* Latest release card */
+.latest-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.latest-card-top {
+  background: var(--orange);
+  padding: 24px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.latest-card-top::before {
+  content: 'LATEST';
+  position: absolute;
+  right: -10px; top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-family: var(--display);
+  font-size: 4.5rem;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.12);
+  white-space: nowrap;
+}
+
+.latest-version {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 6px;
+}
+
+.latest-name {
+  font-family: var(--display);
+  font-size: 2.2rem;
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.latest-date {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.65);
+}
+
+.latest-card-body {
+  padding: 24px 28px;
+}
+
+.latest-notes {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+#btn-download-latest {
+  width: 100%;
+  justify-content: center;
+}
+
+.download-info {
+  margin-top: 14px;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.download-info::before {
+  content: '⚠';
+  font-family: sans-serif;
+}
+
+/* Versions list */
+.versions-header {
+  margin-bottom: 20px;
+}
+
+.versions-title {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+.versions-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  margin-top: 4px;
+}
+
+#versions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.version-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+
+.version-row:hover {
+  border-color: var(--orange-line);
+}
+
+.version-row-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.version-tag {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--orange);
+  font-weight: 500;
+}
+
+.version-date {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.version-dl-btn {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.version-dl-btn:hover {
+  border-color: var(--orange-line);
+  color: var(--orange);
+}
+
+.versions-loading {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 40px 0;
+}
+
+/* ═══════════════════════════════════════════════
+   REQUIREMENTS
+═══════════════════════════════════════════════ */
+#requirements {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.req-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 48px;
+}
+
+.req-item {
+  background: var(--card);
+  padding: 28px 24px;
+}
+
+.req-icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.req-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.req-value {
+  font-size: 0.9rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-brand {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+}
+
+.footer-meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  .download-layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .req-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hero-stats {
+    gap: 32px;
+  }
+  .nav-links {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .req-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .footer-inner {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="nav-logo-dot"></div>
+      SHOPEE BOOSTER
+      <div class="status-indicator">
+        <div class="status-led"></div>
+        V3.0.0 ESTÁVEL
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#features">Módulos</a></li>
+      <li><a href="#download">Download</a></li>
+      <li><a href="#requirements">Requisitos</a></li>
+    </ul>
+    <button class="nav-cta" onclick="scrollTo('#download')">↓ Download</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="container">
+
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Windows · Suite Pro · Gratuito
+    </div>
+
+    <h1 class="hero-title">
+      SHOPEE
+      <span>BOOSTER</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Suite profissional para vendedores Shopee. Audite concorrentes, otimize listings com IA, 
+      gerencie imagens de produto e monitore o mercado em tempo real — tudo em um .exe portátil.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#download" class="btn-primary" id="hero-dl-btn">
+        <span>⬇</span>
+        Baixar Agora
+      </a>
+      <a href="#features" class="btn-secondary">
+        <span>→</span>
+        Ver Módulos
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-value" id="stat-version">3.0.0</div>
+        <div class="stat-label">Versão Atual</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Módulos Ativos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">0</div>
+        <div class="stat-label">Custo de Uso</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Local · Sem Servidor</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ FEATURES ═══════════════════ -->
+<section id="features">
+  <div class="container">
+
+    <div class="features-header">
+      <div class="section-label">Módulos</div>
+      <h2 class="section-title">TRÊS FERRAMENTAS,<br>UM EXECUTÁVEL</h2>
+      <p class="section-desc">
+        Cada módulo foi construído em cima do real comportamento da plataforma — 
+        sem APIs pagas, sem assinatura, sem servidor externo.
+      </p>
+    </div>
+
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <span class="feature-version">v1.0 — v3.0</span>
+        <span class="feature-icon">🕵️</span>
+        <div class="feature-name">AUDITORIA PRO</div>
+        <p class="feature-desc">
+          Análise profunda da sua loja e dos concorrentes diretos, com IA gerando o listing perfeito baseado em dados reais de mercado.
+        </p>
+        <ul class="feature-bullets">
+          <li>Interceptação de API Shopee via Playwright</li>
+          <li>Radar de concorrentes por keyword</li>
+          <li>Mineração de avaliações (via Mercado Livre)</li>
+          <li>Geração de título, tags e descrição com Gemini</li>
+          <li>Estúdio de imagens — remoção de fundo + cenário IA</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-version">v2.0</span>
+        <span class="feature-icon">🤖</span>
+        <div class="feature-name">CHATBOT CONCIERGE</div>
+        <p class="feature-desc">
+          Assistente multimodal que combina atendimento ao cliente, análise de imagens e otimização de listings — tudo pelo chat.
+        </p>
+        <ul class="feature-bullets">
+          <li>Contexto completo da Auditoria integrado</li>
+          <li>Processamento de imagens por linguagem natural</li>
+          <li>Encadeamento de operações multi-intent</li>
+          <li>Badges, vinheta e callouts via Gemini Vision</li>
+          <li>Gerador de FAQ para Seller Centre</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-version">v3.0 — Beta</span>
+        <span class="feature-icon">📡</span>
+        <div class="feature-name">SENTINELA</div>
+        <p class="feature-desc">
+          Monitor de mercado em tempo real. Detecta mudanças de preço, novos concorrentes e tendências de nicho — e envia alertas direto no Telegram.
+        </p>
+        <ul class="feature-bullets">
+          <li>Ciclo automático a cada 4 horas em background</li>
+          <li>Alertas de mudança de preço (±5%)</li>
+          <li>Ranking Top 100 lojas do nicho</li>
+          <li>Gráfico de tendência de preço (7 dias)</li>
+          <li>Integração Telegram via Bot próprio</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ DOWNLOAD ═══════════════════ -->
+<section id="download">
+  <div class="container">
+
+    <div class="section-label">Download</div>
+    <h2 class="section-title">ESCOLHA SUA VERSÃO</h2>
+
+    <div class="download-layout" style="margin-top: 48px;">
+
+      <!-- Latest -->
+      <div>
+        <div class="latest-card">
+          <div class="latest-card-top">
+            <div class="latest-version" id="latest-version-label">Versão atual</div>
+            <div class="latest-name" id="latest-version-name">v3.0.0</div>
+            <div class="latest-date" id="latest-date">Carregando...</div>
+          </div>
+          <div class="latest-card-body">
+            <p class="latest-notes" id="latest-notes">
+              Módulo Sentinela — monitoramento de mercado em tempo real com alertas Telegram, ranking de lojas e gráficos de tendência de preço.
+            </p>
+            <a class="btn-primary" id="btn-download-latest" href="#" target="_blank" rel="noopener">
+              <span>⬇</span>
+              Baixar ShopeeBooster.exe
+            </a>
+            <div class="download-info">
+              Windows 10/11 x64 — Nenhuma instalação necessária
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- All versions -->
+      <div>
+        <div class="versions-header">
+          <div class="versions-title">HISTÓRICO DE VERSÕES</div>
+          <div class="versions-subtitle">// releases disponíveis</div>
+        </div>
+        <div id="versions-list">
+          <div class="versions-loading">Carregando versões...</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ REQUIREMENTS ═══════════════════ -->
+<section id="requirements">
+  <div class="container">
+    <div class="section-label">Requisitos</div>
+    <h2 class="section-title">O QUE VOCÊ PRECISA</h2>
+    <p class="section-desc">
+      Executável portátil sem dependências extras. Apenas uma API key gratuita do Google para as funções de IA.
+    </p>
+
+    <div class="req-grid">
+      <div class="req-item">
+        <span class="req-icon">🖥️</span>
+        <div class="req-label">Sistema</div>
+        <div class="req-value">Windows 10/11 x64</div>
+      </div>
+      <div class="req-item">
+        <span class="req-icon">⚡</span>
+        <div class="req-label">Memória RAM</div>
+        <div class="req-value">4 GB livres (Min)</div>
+      </div>
+      <div class="req-item">
+        <span class="req-icon">💾</span>
+        <div class="req-label">Espaço em Disco</div>
+        <div class="req-value">~1 GB livre (Build)</div>
+      </div>
+      <div class="req-item">
+        <span class="req-icon">🌐</span>
+        <div class="req-label">Conexão</div>
+        <div class="req-value">Internet obrigatória</div>
+      </div>
+    </div>
+
+    <!-- Setup steps -->
+    <div style="margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+
+      <div style="background: var(--card); padding: 28px 24px;">
+        <div style="font-family: var(--display); font-size: 3rem; color: var(--orange); line-height:1; margin-bottom: 12px;">01</div>
+        <div style="font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.04em; margin-bottom: 8px;">BAIXAR E EXECUTAR</div>
+        <p style="font-size: 0.83rem; color: var(--text-muted); font-weight: 300; line-height: 1.7;">Faça o download do <code style="font-family: var(--mono); color: var(--orange); font-size: 0.78rem;">ShopeeBooster.exe</code> e execute. Nenhuma instalação necessária — pode deixar em qualquer pasta.</p>
+      </div>
+
+      <div style="background: var(--card); padding: 28px 24px;">
+        <div style="font-family: var(--display); font-size: 3rem; color: var(--orange); line-height:1; margin-bottom: 12px;">02</div>
+        <div style="font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.04em; margin-bottom: 8px;">CONFIGURAR API KEY</div>
+        <p style="font-size: 0.83rem; color: var(--text-muted); font-weight: 300; line-height: 1.7;">Acesse <a href="https://aistudio.google.com" target="_blank" style="color: var(--orange); text-decoration: underline;">aistudio.google.com</a>, crie uma chave gratuita e insira na tela inicial. A chave é salva localmente.</p>
+      </div>
+
+      <div style="background: var(--card); padding: 28px 24px;">
+        <div style="font-family: var(--display); font-size: 3rem; color: var(--orange); line-height:1; margin-bottom: 12px;">03</div>
+        <div style="font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.04em; margin-bottom: 8px;">INSERIR URL DA LOJA</div>
+        <p style="font-size: 0.83rem; color: var(--text-muted); font-weight: 300; line-height: 1.7;">Cole a URL da sua loja Shopee no campo de Auditoria. O app analisa seus produtos e concorrentes automaticamente.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">SHOPEE BOOSTER</div>
+      <div class="footer-meta">Ferramenta independente. Não afiliada à Shopee.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════ JS ═══════════════════ -->
+<script>
+/*
+  ══════════════════════════════════════════════════════
+  RELEASES CONFIG
+  
+  O repositório é privado, então a API do GitHub não
+  funciona sem token. Mantenha este array atualizado
+  manualmente a cada novo release.
+
+  Para cada release, adicione um objeto no início do
+  array com:
+    - tag:      "v3.0.0"
+    - name:     "Shopee Booster v3.0.0"
+    - date:     "2025-04-01"  (YYYY-MM-DD)
+    - notes:    "Descrição curta do que mudou"
+    - url:      URL direta para o .exe no GitHub Release
+                (vá em: GitHub → Releases → clique direito
+                 no .exe → copiar endereço do link)
+  ══════════════════════════════════════════════════════
+*/
+const RELEASES = [
+  {
+    tag:   "v3.0.0",
+    name:  "Shopee Booster 3.0.0 — Sentinela",
+    date:  "2025-04-08",
+    notes: "Módulo Sentinela com monitoramento em tempo real, alertas Telegram, ranking de lojas e gráfico de tendência de preço do nicho.",
+    url:   "" // ← cole aqui o link direto do .exe no GitHub Release
+  },
+  {
+    tag:   "v2.0.0",
+    name:  "Shopee Booster 2.0.0 — Chatbot",
+    date:  "2025-04-06",
+    notes: "Chatbot Concierge multimodal com edição criativa de imagens via Gemini Vision, multi-intent encadeado e FAQ personalizado.",
+    url:   ""
+  },
+  {
+    tag:   "v1.0.0",
+    name:  "Shopee Booster 1.0.0 — Auditoria",
+    date:  "2025-03-01",
+    notes: "Versão inicial com Auditoria Pro, Radar de Concorrentes, Mineração de Avaliações e Estúdio de Mídia.",
+    url:   ""
+  },
+];
+
+// ── Formata data ─────────────────────────────────────────
+function formatDate(dateStr) {
+  if (!dateStr) return "—";
+  const [y, m, d] = dateStr.split("-");
+  const months = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+  return `${d} ${months[parseInt(m)-1]} ${y}`;
+}
+
+// ── Popula Latest card ───────────────────────────────────
+function populateLatest(release) {
+  document.getElementById("latest-version-label").textContent = release.tag;
+  document.getElementById("latest-version-name").textContent  = release.name;
+  document.getElementById("latest-date").textContent          = formatDate(release.date);
+  document.getElementById("latest-notes").textContent         = release.notes;
+  document.getElementById("stat-version").textContent         = release.tag.replace("v","");
+
+  const btn = document.getElementById("btn-download-latest");
+  const heroDl = document.getElementById("hero-dl-btn");
+
+  if (release.url) {
+    btn.href = release.url;
+    heroDl.href = release.url;
+  } else {
+    btn.style.opacity = "0.5";
+    btn.style.pointerEvents = "none";
+    btn.querySelector("span").nextSibling.textContent = " Link em breve";
+  }
+}
+
+// ── Popula lista de versões ──────────────────────────────
+function populateVersions(releases) {
+  const container = document.getElementById("versions-list");
+  container.innerHTML = "";
+
+  releases.forEach((r, i) => {
+    const row = document.createElement("div");
+    row.className = "version-row";
+    row.innerHTML = `
+      <div class="version-row-left">
+        <span class="version-tag">${r.tag}</span>
+        <span class="version-date">${formatDate(r.date)}</span>
+      </div>
+      <button class="version-dl-btn" ${r.url ? '' : 'disabled style="opacity:0.4;cursor:default"'}>
+        ${r.url ? "⬇ Baixar" : "Em breve"}
+      </button>
+    `;
+
+    if (r.url) {
+      row.querySelector("button").addEventListener("click", () => {
+        window.open(r.url, "_blank", "noopener");
+      });
+      row.addEventListener("click", (e) => {
+        if (e.target.tagName !== "BUTTON") window.open(r.url, "_blank", "noopener");
+      });
+    }
+
+    container.appendChild(row);
+  });
+}
+
+// ── Init ─────────────────────────────────────────────────
+function init() {
+  if (RELEASES.length === 0) return;
+  populateLatest(RELEASES[0]);
+  populateVersions(RELEASES);
+}
+
+// ── Smooth scroll helper ─────────────────────────────────
+function scrollTo(selector) {
+  document.querySelector(selector)?.scrollIntoView({ behavior: "smooth" });
+}
+
+window.addEventListener("DOMContentLoaded", init);
+
+// ── Scroll reveal animação nos cards ─────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = "1";
+      e.target.style.transform = "translateY(0)";
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll(".feature-card, .req-item").forEach(el => {
+  el.style.opacity = "0";
+  el.style.transform = "translateY(20px)";
+  el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
