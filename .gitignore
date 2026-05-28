@@ -13,3 +13,9 @@ task.md
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
