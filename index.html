@@ -412,11 +412,8 @@ section {
 .features-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 2px;
+  gap: 0;
   background: transparent;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
 }
 
 .feature-card {
@@ -426,6 +423,25 @@ section {
   position: relative;
   overflow: hidden;
   transition: background 0.25s;
+  border: 1px solid var(--border);
+}
+
+.features-grid .feature-card:nth-child(1) {
+  border-radius: var(--radius-lg) 0 0 0;
+}
+
+.features-grid .feature-card:nth-child(3) {
+  border-radius: 0 var(--radius-lg) 0 0;
+}
+
+.features-grid .feature-card:nth-child(4) {
+  border-radius: 0 0 0 var(--radius-lg);
+  border-top: none;
+}
+
+.features-grid .feature-card:nth-child(5) {
+  border-radius: 0 0 var(--radius-lg) 0;
+  border-top: none;
 }
 
 .features-grid .feature-card:nth-child(4) {
@@ -797,12 +813,18 @@ footer {
 @media (max-width: 900px) {
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 2px;
+    background: var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
   }
 
   .feature-card,
   .features-grid .feature-card:nth-child(4),
   .features-grid .feature-card:nth-child(5) {
     grid-column: auto;
+    border: none;
+    border-radius: 0;
   }
   .download-layout {
     grid-template-columns: 1fr;
