@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shopee Booster — Suite Pro</title>
-<meta name="description" content="Suite profissional de otimização para vendedores Shopee. Auditoria de concorrentes, chatbot multimodal e monitoramento em tempo real.">
+<meta name="description" content="Suite profissional gratuita para vendedores Shopee. Auditoria inteligente, Loja conectada, Radar automático de concorrentes, Chatbot com IA e Sentinela com alertas.">
 
 <link rel="icon" type="image/png" href="assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -708,7 +708,7 @@ section {
 
 .req-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 2px;
   background: var(--border);
   border: 1px solid var(--border);
@@ -741,6 +741,17 @@ section {
   font-size: 0.9rem;
   color: var(--text);
   font-weight: 500;
+}
+
+.setup-grid {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 /* ═══════════════════════════════════════════════
@@ -785,6 +796,9 @@ footer {
   .req-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .setup-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .hero-stats {
     gap: 32px;
   }
@@ -795,6 +809,9 @@ footer {
 
 @media (max-width: 600px) {
   .req-grid {
+    grid-template-columns: 1fr;
+  }
+  .setup-grid {
     grid-template-columns: 1fr;
   }
   .hero-stats {
@@ -819,7 +836,7 @@ footer {
       SHOPEE BOOSTER
       <div class="status-indicator">
         <div class="status-led"></div>
-        V4.0.0 ESTÁVEL
+        V4.2.1 ESTÁVEL
       </div>
     </div>
     <ul class="nav-links">
@@ -847,8 +864,8 @@ footer {
     </h1>
 
     <p class="hero-subtitle">
-      Suite profissional para vendedores Shopee. Audite concorrentes, otimize listings com IA, 
-      gerencie imagens de produto e monitore o mercado em tempo real — tudo em um .exe portátil.
+      Suite profissional para vendedores Shopee. Conecte sua loja, construa uma base local de concorrentes, 
+      otimize listings com IA e monitore o mercado com Radar, Chatbot e Sentinela — tudo em um .exe portátil.
     </p>
 
     <div class="hero-actions">
@@ -864,11 +881,11 @@ footer {
 
     <div class="hero-stats">
       <div class="stat-item">
-        <div class="stat-value" id="stat-version">4.0.0</div>
+        <div class="stat-value" id="stat-version">4.2.1</div>
         <div class="stat-label">Versão Atual</div>
       </div>
       <div class="stat-item">
-        <div class="stat-value">3</div>
+        <div class="stat-value">5</div>
         <div class="stat-label">Módulos Ativos</div>
       </div>
       <div class="stat-item">
@@ -890,61 +907,92 @@ footer {
 
     <div class="features-header">
       <div class="section-label">Módulos</div>
-      <h2 class="section-title">TRÊS FERRAMENTAS,<br>UM EXECUTÁVEL</h2>
+      <h2 class="section-title">CINCO MÓDULOS,<br>UM EXECUTÁVEL</h2>
       <p class="section-desc">
-        Cada módulo foi construído em cima do real comportamento da plataforma — 
-        sem APIs pagas, sem assinatura, sem servidor externo.
+        O Shopee Booster agora combina loja conectada, Radar de concorrentes, Auditoria, Chatbot e Sentinela em um fluxo local — 
+        sem assinatura, sem servidor próprio e com fallback inteligente quando o scraping falha.
       </p>
     </div>
 
     <div class="features-grid">
 
       <div class="feature-card">
-        <span class="feature-version">v1.0 — v3.0</span>
+        <span class="feature-version">v4.2.1 — Novo</span>
+        <span class="feature-icon">🏪</span>
+        <div class="feature-name">LOJA CONECTADA</div>
+        <p class="feature-desc">
+          Salva sua loja ativa e constrói um espelho local dos produtos para Auditoria, Chatbot e Radar funcionarem mesmo quando a Shopee instabiliza.
+        </p>
+        <ul class="feature-bullets">
+          <li>Conexão por URL da loja</li>
+          <li>Espelho local com produtos encontrados</li>
+          <li>Fallback via Chrome do Radar quando o scraping retorna 0 itens</li>
+          <li>Loja ativa reaproveitada entre Auditoria, Chatbot e Radar</li>
+          <li>Botão para desconectar ou atualizar a loja quando quiser</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-version">v4.2 — Automático</span>
+        <span class="feature-icon">📊</span>
+        <div class="feature-name">RADAR DE CONCORRENTES</div>
+        <p class="feature-desc">
+          Descobre, coleta, classifica e renova concorrentes automaticamente, criando uma base local confiável para decisões de preço e posicionamento.
+        </p>
+        <ul class="feature-bullets">
+          <li>Busca automática de concorrentes no Mercado Livre</li>
+          <li>Classificação por relevância: direto, parcial ou rejeitado</li>
+          <li>Relatório de padrões com preço, termos, features e evidências</li>
+          <li>Quality Gate com concorrentes efetivos e agrupamento de variações</li>
+          <li>Renovação manual/semanal da base local</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-version">v1.0 — v4.2</span>
         <span class="feature-icon">🕵️</span>
         <div class="feature-name">AUDITORIA PRO</div>
         <p class="feature-desc">
-          Análise profunda da sua loja e dos concorrentes diretos, com IA gerando o listing perfeito baseado em dados reais de mercado.
+          Otimiza listings com IA usando a melhor base disponível: scraping em tempo real, Radar local ou fallback automático quando uma fonte falha.
         </p>
         <ul class="feature-bullets">
-          <li>Interceptação de API Shopee via Playwright</li>
-          <li>Radar de concorrentes por keyword</li>
-          <li>Mineração de avaliações (via Mercado Livre)</li>
-          <li>Geração de título, tags e descrição com Gemini</li>
-          <li>Estúdio de imagens — remoção de fundo + cenário IA</li>
+          <li>Escolha automática entre scraping e Radar</li>
+          <li>Geração de título, descrição, tags e argumentos de venda</li>
+          <li>Contexto de mercado com concorrentes reais</li>
+          <li>Evita features fora do nicho, como notebook em produto infantil</li>
+          <li>Saída limpa, sem debug técnico para o usuário final</li>
         </ul>
       </div>
 
       <div class="feature-card">
-        <span class="feature-version">v2.0</span>
+        <span class="feature-version">v2.0 — v4.2</span>
         <span class="feature-icon">🤖</span>
         <div class="feature-name">CHATBOT CONCIERGE</div>
         <p class="feature-desc">
-          Assistente multimodal que combina atendimento ao cliente, análise de imagens e otimização de listings — tudo pelo chat.
+          Assistente multimodal que responde sobre loja, produtos e mercado, usando o Radar quando a pergunta envolve preço, concorrentes ou listing.
         </p>
         <ul class="feature-bullets">
-          <li>Contexto completo da Auditoria integrado</li>
-          <li>Processamento de imagens por linguagem natural</li>
-          <li>Encadeamento de operações multi-intent</li>
-          <li>Badges, vinheta e callouts via Gemini Vision</li>
-          <li>Gerador de FAQ para Seller Centre</li>
+          <li>Usa Radar em perguntas sobre preço, título, tags e vendas</li>
+          <li>Não aciona Radar em dúvidas gerais do app</li>
+          <li>Pede seleção de produto quando falta contexto</li>
+          <li>Suporte a imagens e otimização por linguagem natural</li>
+          <li>Contexto integrado à loja conectada</li>
         </ul>
       </div>
 
       <div class="feature-card">
-        <span class="feature-version">v4.0 — Estável</span>
+        <span class="feature-version">v4.0 — v4.2.1</span>
         <span class="feature-icon">📡</span>
         <div class="feature-name">SENTINELA</div>
         <p class="feature-desc">
-          Monitor de mercado em tempo real. Acompanha preços, detecta novos concorrentes, mudanças no ranking e tendências do nicho — com alertas enviados direto no Telegram.
+          Monitor de mercado em background. Quando a fonte normal de concorrentes falha, usa o Radar automaticamente como fallback.
         </p>
         <ul class="feature-bullets">
-          <li>Ciclo automático a cada 4 horas em background</li>
-          <li>Alertas de mudança de preço (±5%)</li>
-          <li>Detecção de novos concorrentes por palavra-chave monitorada</li>
-          <li>Ranking Top 100 lojas do nicho</li>
-          <li>Gráfico de tendência de preço (7 dias)</li>
-          <li>Integração Telegram via Bot próprio</li>
+          <li>Ciclo automático em background</li>
+          <li>Alertas de mudança de preço</li>
+          <li>Fallback Radar ligado por padrão na v4.2.1</li>
+          <li>Resumo de concorrentes no Telegram</li>
+          <li>Trigger, lock e scheduler preservados</li>
         </ul>
       </div>
 
@@ -971,14 +1019,14 @@ footer {
           </div>
           <div class="latest-card-body">
             <p class="latest-notes" id="latest-notes">
-              Módulo Sentinela — monitoramento de mercado em tempo real com novos concorrentes, alertas Telegram, ranking de lojas e gráficos de tendência de preço.
+              Hotfix v4.2.1 — Loja Conectada, Espelho da Loja em instalação limpa, Radar automático, Auditoria e Chatbot com base de mercado e Sentinela com fallback Radar automático.
             </p>
             <a class="btn-primary" id="btn-download-latest" href="#" target="_blank" rel="noopener">
               <span>⬇</span>
-              Baixar ShopeeBooster.exe
+              Baixar ShopeeBooster.zip
             </a>
             <div class="download-info">
-              Windows 10/11 x64 — Nenhuma instalação necessária
+              Windows 10/11 x64 — Extraia o ZIP e execute o ShopeeBooster.exe
             </div>
           </div>
         </div>
@@ -1005,7 +1053,7 @@ footer {
     <div class="section-label">Requisitos</div>
     <h2 class="section-title">O QUE VOCÊ PRECISA</h2>
     <p class="section-desc">
-      Executável portátil sem dependências extras. Apenas uma API key gratuita do Google para as funções de IA.
+      Executável portátil. Para recursos de IA, use uma API key gratuita do Google AI Studio. Para Radar e coleta assistida, o app usa o Chrome local em perfil separado.
     </p>
 
     <div class="req-grid">
@@ -1029,27 +1077,38 @@ footer {
         <div class="req-label">Conexão</div>
         <div class="req-value">Internet obrigatória</div>
       </div>
+      <div class="req-item">
+        <span class="req-icon">🌍</span>
+        <div class="req-label">Navegador</div>
+        <div class="req-value">Google Chrome local</div>
+      </div>
     </div>
 
     <!-- Setup steps -->
-    <div style="margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+    <div class="setup-grid">
 
       <div style="background: var(--card); padding: 28px 24px;">
         <div style="font-family: var(--display); font-size: 3rem; color: var(--orange); line-height:1; margin-bottom: 12px;">01</div>
-        <div style="font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.04em; margin-bottom: 8px;">BAIXAR E EXECUTAR</div>
-        <p style="font-size: 0.83rem; color: var(--text-muted); font-weight: 300; line-height: 1.7;">Faça o download do <code style="font-family: var(--mono); color: var(--orange); font-size: 0.78rem;">ShopeeBooster.exe</code> e execute. Nenhuma instalação necessária — pode deixar em qualquer pasta.</p>
+        <div style="font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.04em; margin-bottom: 8px;">BAIXAR E EXTRAIR</div>
+        <p style="font-size: 0.83rem; color: var(--text-muted); font-weight: 300; line-height: 1.7;">Baixe o ZIP, extraia a pasta e execute <code style="font-family: var(--mono); color: var(--orange); font-size: 0.78rem;">ShopeeBooster.exe</code>. O app escolhe uma porta livre automaticamente.</p>
       </div>
 
       <div style="background: var(--card); padding: 28px 24px;">
         <div style="font-family: var(--display); font-size: 3rem; color: var(--orange); line-height:1; margin-bottom: 12px;">02</div>
         <div style="font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.04em; margin-bottom: 8px;">CONFIGURAR API KEY</div>
-        <p style="font-size: 0.83rem; color: var(--text-muted); font-weight: 300; line-height: 1.7;">Acesse <a href="https://aistudio.google.com" target="_blank" style="color: var(--orange); text-decoration: underline;">aistudio.google.com</a>, crie uma chave gratuita e insira na tela inicial. A chave é salva localmente.</p>
+        <p style="font-size: 0.83rem; color: var(--text-muted); font-weight: 300; line-height: 1.7;">Acesse <a href="https://aistudio.google.com" target="_blank" style="color: var(--orange); text-decoration: underline;">aistudio.google.com</a>, crie uma chave gratuita e insira na tela inicial. A chave fica salva localmente.</p>
       </div>
 
       <div style="background: var(--card); padding: 28px 24px;">
         <div style="font-family: var(--display); font-size: 3rem; color: var(--orange); line-height:1; margin-bottom: 12px;">03</div>
-        <div style="font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.04em; margin-bottom: 8px;">INSERIR URL DA LOJA</div>
-        <p style="font-size: 0.83rem; color: var(--text-muted); font-weight: 300; line-height: 1.7;">Cole a URL da sua loja Shopee no campo de Auditoria. O app analisa seus produtos e concorrentes automaticamente.</p>
+        <div style="font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.04em; margin-bottom: 8px;">CONECTAR A LOJA</div>
+        <p style="font-size: 0.83rem; color: var(--text-muted); font-weight: 300; line-height: 1.7;">Cole a URL da sua loja na seção Loja. O Espelho salva seus produtos localmente para Auditoria, Chatbot e Radar reutilizarem.</p>
+      </div>
+
+      <div style="background: var(--card); padding: 28px 24px;">
+        <div style="font-family: var(--display); font-size: 3rem; color: var(--orange); line-height:1; margin-bottom: 12px;">04</div>
+        <div style="font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.04em; margin-bottom: 8px;">RODAR O RADAR</div>
+        <p style="font-size: 0.83rem; color: var(--text-muted); font-weight: 300; line-height: 1.7;">Use o Radar de Concorrentes para criar a base de mercado. Auditoria, Chatbot e Sentinela usam essa base automaticamente quando ela estiver disponível.</p>
       </div>
 
     </div>
@@ -1082,12 +1141,26 @@ footer {
     - name:     "Shopee Booster v3.0.0"
     - date:     "2025-04-01"  (YYYY-MM-DD)
     - notes:    "Descrição curta do que mudou"
-    - url:      URL direta para o .exe no GitHub Release
+    - url:      URL direta para o ZIP/EXE no GitHub Release
                 (vá em: GitHub → Releases → clique direito
-                 no .exe → copiar endereço do link)
+                 no asset → copiar endereço do link)
   ══════════════════════════════════════════════════════
 */
 const RELEASES = [
+  {
+    tag:   "v4.2.1",
+    name:  "Shopee Booster 4.2.1 — Hotfix Loja + Radar",
+    date:  "2026-05-27",
+    notes: "Hotfix da v4.2: Loja Conectada persistente, Espelho da Loja funcionando em instalação limpa, Radar automático, Auditoria/Chatbot com base de mercado e Sentinela com fallback Radar ligado por padrão.",
+    url:   "https://github.com/Kuuhaku-Allan/shopee-booster/releases/download/v4.2.1/ShopeeBooster-v4.2.1-win-x64.zip"
+  },
+  {
+    tag:   "v4.2.0",
+    name:  "Shopee Booster 4.2.0 — Radar Automático",
+    date:  "2026-05-27",
+    notes: "Release supersedida pela v4.2.1. Introduziu Radar Automático, renovação semanal, Auditoria/Chatbot/Sentinela com Radar, mas tinha limitações em instalação limpa.",
+    url:   "https://github.com/Kuuhaku-Allan/shopee-booster/releases/download/v4.2.0/ShopeeBooster-v4.2.0-win-x64.zip"
+  },
   {
     tag:   "v4.0.0",
     name:  "Shopee Booster 4.0.0 — Suite Pro",
